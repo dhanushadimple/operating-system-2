@@ -1,0 +1,62 @@
+XEN:
+Xen is a type 1 hypervisor that creates logical pools of system resources so that many virtual machines can share the same physical resources.
+Xen is a hypervisor that runs directly on the system hardware. Xen inserts a virtualization layer between the system hardware and the virtual machines, turning the system hardware into a pool of logical computing resources that Xen can dynamically allocate to any guest operating system. The operating systems running in virtual machines interact with the virtual resources as if they were physical resources.
+FIGURE 1. THE XEN ARCHITECTURE
+                
+ 
+Xen is running three virtual machines. Each virtual machine is running a guest operating system and applications independent of other virtual machines while sharing the same physical resources.
+
+Features:
+The following are key concepts of the Xen architecture:
+•	Full virtualization.
+•	Xen can run multiple guest OS, each in its on VM.
+•	Instead of a driver, lots of great stuff happens in the Xen daemon, x end.
+FULL VIRTUALIZATION
+Most hypervisors are based on full virtualization which means that they completely emulate all hardware devices to the virtual machines. Guest operating systems do not require any modification and behave as if they each have exclusive access to the entire system.
+Full virtualization often includes performance drawbacks because complete emulation usually demands more processing resources (and more overhead) from the hypervisor. Xen is based on paravirtualization; it requires that the guest operating systems be modified to support the Xen operating environment. However, the user space applications and libraries do not require modification.
+Operating system modifications are necessary for reasons like:
+•	So that Xen can replace the operating system as the most privileged software.
+•	So that Xen can use more efficient interfaces (such as virtual block devices and virtual network interfaces) to emulate devices — this increases performance.
+Xen can run multiple guest OS each in its on VM
+Xen can run several guest operating systems each running in its own virtual machine or domain. When Xen is first installed, it automatically creates the first domain, Domain 0 (or dom0).
+Domain 0 is the management domain and is responsible for managing the system. It performs tasks like building additional domains (or virtual machines), managing the virtual devices for each virtual machine, suspending virtual machines, resuming virtual machines, and migrating virtual machines. Domain 0 runs a guest operating system and is responsible for the hardware devices.
+Instead of a driver, lots of great stuff happens in the Xen daemon
+The Xen daemon, x end, is a Python program that runs in dom0. It is the central point of control for managing virtual resources across all the virtual machines running on the Xen hypervisor. Most of the command parsing, validation, and sequencing happens in user space in x end and not in a driver.
+IBM supports the SUSE Linux Enterprise Edition (SLES) 10 version of Xen which supports the following configuration:
+•	Four virtual machines per processor and up to 64 virtual machines per physical system.
+•	SLES 10 guest operating systems (para virtualized only).
+DEPLOYING VIRTUALIZATION
+To deploy virtualization for Xen:
+•	Install Xen on the system.
+•	Create and configure virtual machines (this includes the guest operating system).
+Install the Xen software using one of the following methods:
+•	Interactive install: Use this procedure to install directly on dedicated virtual machine on the Xen server. This dedicated virtual machine is referred to as the client computer in the install procedure.
+•	Install from CommCell console: Use this procedure to install remotely on a dedicated virtual machine on the Xen server.
+Managing your virtual machines
+There are several virtual machine managers available including:
+•	Open source mangers: Open Xen Manager, an open source clone of Citrix's Xen Server Xen Centre and manages both XCP and Citrix's Xen Server. Xen Cloud Control System (XCCS) is a lightweight front end package for the excellent Xen Cloud Platform cloud computing system. Zentific , a web-based management interface for the effective control of virtual machines running upon the Xen hypervisor.
+•	Commercial managers: Con virture: Convert is a centralized management solution that lets you provision, monitor, and manage the complete life cycle of your Xen deployment. Citrix Xen Centre is a Windows-native graphical user interface for managing Citrix Xen Server and XCP. Versiera is a web-based Internet technology designed to securely manage and monitor both cloud environments and enterprises with support for Linux, FreeBSD, OpenBSD, NetBSD, OS X, Windows, Solaris, Open WRT, and DD-WRT.
+CHOOSING XEN
+On the pro side:
+•	The Xen server is built on the open source Xen hypervisor and uses a combination of paravirtualization and hardware-assisted virtualization. This collaboration between the OS and the virtualization platform enables the development of a simpler hypervisor that delivers highly optimized performance.
+•	Xen provides sophisticated workload balancing that captures CPU, memory, disk I/O, and network I/O data; it offers two optimization modes: one for performance and another for density.
+•	The Xen server takes advantage of a unique storage integration feature called the Citrix Storage Link. With it, the sysadmin can directly leverage features of arrays from such companies as HP, Dell Equal Logic, NetApp, EMC, and others.
+•	The Xen server includes multicore processor support, live migration, physical-server-to-virtual-machine conversion (P2V) and virtual-to-virtual conversion (V2V) tools, centralized multi server management, real-time performance monitoring, and speedy performance for Windows and Linux.
+On the con side:
+•	Xen has a relatively large footprint and relies on Linux in dom0.
+•	Xen relies on third-party solutions for hardware device drivers, storage, backup and recovery, and fault tolerance.
+•	Xen gets bogged down with anything with a high I/O rate or anything that sucks up resources and starves other VMs.
+•	Xen's integration can be problematic; it could become a burden on your Linux kernel over time.
+•	Xen Server 5 is missing 802.1Q virtual local area network (VLAN) trunking; as for security, it doesn't offer directory services integration, role-based access controls, or security logging and auditing or administrative actions.
+VMWARE:
+VMware is a virtualization and cloud computing software provider based in Palo Alto, Calif. Founded in 1998, VMware is a subsidiary of Dell Technologies. EMC Corporation originally acquired VMware in 2004; EMC was later acquired by Dell Technologies in 2016. VMware bases its virtualization technologies on its bare-metal hypervisor ESX/ESXI in x86 architecture.
+With VMware server virtualization, a hypervisor is installed on the physical server to allow for multiple virtual machines (VMs) to run on the same physical server. Each VM can run its own operating system (OS), which means multiple OSes can run on one physical server. All the VMs on the same physical server share resources, such as networking and RAM. In 2019, VMware added support to its hypervisor to run containerized workloads in a Kubernetes cluster in a similar way. These types of workloads can be managed by the infrastructure team in the same way as virtual machines and the DevOps teams can deploy containers as they were used to.
+Diane Greene, Scott Devine, Mendel Rosenblum, Edward Wang and Edouard Bug neon founded VMware, which launched its first product -- VMware Workstation -- in 1999. The company released its second product, VMware ESX in 2001.
+VMware's current CEO is Patrick Gel singer, appointed in 2012.
+VMWARE PRODUCTS
+VMware products include virtualization, networking and security management tools, software-defined data centre software and storage software.
+Data centre and cloud infrastructure
+VMware vSphere is VMware's suite of virtualization products. VMware vSphere, known as VMware Infrastructure prior to 2009, includes the following:
+•	ESXI
+•	vCenter Server
+•	vSphere Client
